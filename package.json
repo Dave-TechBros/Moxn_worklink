@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && sh -c 'case \"$DATABASE_URL\" in postgresql://*|postgres://*) prisma db push --accept-data-loss && npx tsx prisma/seed.ts ;; esac' && next build",
+    "build": "prisma generate && sh -c 'url=\"${DATABASE_URL:-${POSTGRES_PRISMA_URL:-${POSTGRES_URL}}}\"; case \"$url\" in postgresql://*|postgres://*) prisma db push --accept-data-loss && npx tsx prisma/seed.ts ;; esac' && next build",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate"
